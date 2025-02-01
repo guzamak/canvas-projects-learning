@@ -59,6 +59,7 @@ class Energy {
   update(index) {
     const angle = Math.atan2(lastBall.y - this.y, lastBall.x - this.x);
     const speed = 2;
+    // เคลื่อนที่ไปตามองศาที่กำหนด 
     this.dx = Math.cos(angle) * speed;
     this.dy = Math.sin(angle) * speed;
 
