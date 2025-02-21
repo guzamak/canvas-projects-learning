@@ -16,15 +16,19 @@ numParticles = 1
 
 function init() {
     for(var i = 0; i < numParticles; i += 1) {
-        let angle = -Math.PI / 2
-		particles.push(particle.create(0, canvas.height , 10,angle ));
+        // ขยับไปในทิศลบ -90 ( ขึ้นข้างบนเพราะหามุมจากจุดเริ่มต้น )
+        let angle = -Math.PI / 2 
+        // 0,canvas.height,speed,-90 
+		particles.push(particle.create(0, canvas.height , 10, angle ));
 	}
 }
 
 init()
 
+// ความเร่งปกติ
 const accel = vector.create(0.1,0.1)
-const gavity = vector.create(0,0.1)
+// เเรงโนมถ่วงประเภทหนึ่งทำให้ใช้ฟังก์ชั้นเดียวกันได้
+// const gavity = vector.create(0,0.1)
 
 function animation(){
 

@@ -167,6 +167,7 @@ window.onload = function() {
 	}
 
 	function labelPointLeft(p, name) {
+		context.fillStyle = "gray";
 		context.fillText(name, p.x - 40, p.y - 40);
 		context.fillText("x: " + Math.round(p.x), p.x - 40, p.y - 25);
 		context.fillText("y: " + Math.round(p.y), p.x - 40, p.y - 10);

@@ -1,4 +1,5 @@
 var particle = {
+
 	position: null,
 	velocity: null,
 
@@ -11,6 +12,7 @@ var particle = {
 		return obj;
 	},
 
+	// ความเร่งจะทำให้ความเร็วเพิ่มขึ้นในเเต่ละ เฟรม ( t )
 	accelerate:  function(accel){
 		this.velocity.addTo(accel);
 	},

@@ -14,11 +14,12 @@ function init(){
     const startPos = canvas.height / 2;
     for(var angle = 0; angle < Math.PI * 2 ; angle+=.01){
         var radius = 200
-        //  x = circle line in that angle like 2pir = 360 * r = circle circumference
+        //  x = circle line in that angle like 2pie = 360 * r = circle circumference ( เเทนจุดของเส้นรอบวง )
         var x = angle * radius
         var y = Math.tan(angle) * radius
         // var y = Math.cos(angle) * radius
         // var y = Math.sin(angle) * radius
+        // plot จุด y ในเเต่ละจุด x
         ctx.fillRect(x, startPos + y, 5, 5)
     }
 }

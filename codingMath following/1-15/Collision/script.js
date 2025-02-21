@@ -26,6 +26,7 @@ addEventListener("mousemove", (e) => {
 function animation (){
     ctx.clearRect(0, 0, canvas.width , canvas.height);
     ctx.beginPath()
+    // เช็คการ collape ของวงกลม จริงๆมีหลายวิธีที่จะ check ปกติใช้ หรือ 4 ครั่ง เเต่ครั้งนี้ใช้ รัศมี
     if (utils.circleCollision(circle2, circle1)){
         ctx.fillStyle = "red"
     }else{

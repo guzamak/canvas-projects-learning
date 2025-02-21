@@ -19,6 +19,7 @@ function animation (){
     ctx.arc(circle.position.getX(), circle.position.getY(), 10,0,Math.PI*2,false)
     ctx.fill()
     
+    // เเค่พิกัด x y  เท่ากับเท่าไร 
     if(circle.position.getX() + circle.radius >= canvas.width) {
         circle.position.setX(canvas.width - circle.radius);
         circle.velocity.setX(circle.velocity.getX() * circle.bounce);

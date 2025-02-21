@@ -1,32 +1,36 @@
-//  f  = kx
+// กฎของ Hooke f  = kx
 const canvas = document.querySelector("canvas");
 canvas.width =  window.innerWidth
 canvas.height = window.innerHeight
 const ctx = canvas.getContext("2d");
 springPoint = vector.create(canvas.width / 2, canvas.height  / 2),
+
 weight = particle.create(Math.random() * canvas.width, Math.random() * canvas.height , 50, Math.random() * Math.PI * 2),
+
+// k = ค่าคงที่ของสปริง
 // k = 0.01 + Math.random() * .5;
 k = 0.015
+
 weight.radius = 20;
 weight.friction = 0.5 + Math.random() * .5;
 
-// addEventListener("mousemove", function(event) {
-//     springPoint.setX(event.clientX);
-//     springPoint.setY(event.clientY);
-// });
+addEventListener("mousemove", function(event) {
+    springPoint.setX(event.clientX);
+    springPoint.setY(event.clientY);
+});
 
-
-
-
-  
 function animation (){
     ctx.clearRect(0, 0, canvas.width , canvas.height);
+    // คำนวณระยะห่างระหว่างวัตถุกับ springPoint (mousex,mousey)
     var distance = springPoint.subtract(weight.position)
+    // [x*k,y*k]
+    // แรงสปริง ( ความเร่งกลายพันธ์ ) = ระยะห่าง × ค่าคงที่ของสปริง (F=kx)
     var springForce = distance.multiply(k);
-    // 
+    // เปลี่ยนจุด x y ตาม ความเร็ว + springForce ในเเต่ละ T 
 	weight.velocity.addTo(springForce);
 	weight.update();
 
+    // วาดรูปปปปปปปป
 	ctx.beginPath();
 	ctx.arc(weight.position.getX(), weight.position.getY(), weight.radius,0, Math.PI * 2, false);
     ctx.fill();

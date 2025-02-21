@@ -14,6 +14,7 @@ let arrowX = canvas.width / 2
 let arrowY = canvas.height  / 2
 let a = 0;
 
+// หามุมจากจุดลุกศรกับเมาส์
 addEventListener("mousemove", function(event) {
   dx = event.pageX - arrowX;
   dy = event.pageY - arrowY;
@@ -23,10 +24,8 @@ addEventListener("mousemove", function(event) {
 function animation(){
   requestAnimationFrame(animation)
   var radius = 200
-  // update arrow pos
-  // follow circle
-  // arrowX = canvas.width / 2 + Math.cos(a) * canvas.height * .4;
   arrowX =  a * radius
+  // canvas.height * .4 = r ที่ไม่เท่ากันทำให้เคลื่อนที่ไม่เป็นวงกลมจะเป็นวงรีเเทน
   arrowY = canvas.height / 2 + Math.sin(a) * canvas.height * .4;
   a += .01;
   if (arrowX > canvas.width){
@@ -36,6 +35,7 @@ function animation(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.save();
+  // ถ้าไม่ translate สามารถนำ arrowX, arrowY ไปบวกกับตัวข้างล่างได้
   ctx.translate(arrowX, arrowY);
   // rotate to mouse with arctan()
   ctx.rotate(angle);

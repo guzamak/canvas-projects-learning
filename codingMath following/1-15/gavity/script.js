@@ -1,4 +1,4 @@
-//  g = G(Uniersal graitational constant) * mass / r**2
+//  กฎแรงโน้มถ่วงสากล g = G(Uniersal graitational constant) * mass / r**2
 const canvas = document.querySelector("canvas");
 canvas.width =  window.innerWidth
 canvas.height = window.innerHeight

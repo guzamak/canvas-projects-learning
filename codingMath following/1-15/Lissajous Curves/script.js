@@ -1,4 +1,4 @@
-// xy angle เพิ่มในจำนวนที่ไม่เท่ากัน
+// xy angle เพิ่มในจำนวนที่ไม่เท่ากันทำให้เวลา set ตำเเหน่ง x y ใหท่ ไม่ขยับเป็นวงกลม
 const canvas = document.querySelector("canvas");
 canvas.width =  window.innerWidth
 canvas.height = window.innerHeight
@@ -12,9 +12,11 @@ addEventListener('resize', () => {
 })
   
 function init(yangle,xangle){
+    // จุดศุนย์กลางวงกลม
     const centerY = canvas.height / 2;
     const centerX = canvas.width / 2;
     var radius = 200
+    // set x y ใหม่
     var x = Math.cos(xangle) * radius + centerX
     var y = Math.sin(yangle) * radius + centerY
     ctx.fillRect(x, y, 30, 30)

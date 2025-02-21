@@ -22,6 +22,7 @@ var particle = {
 	},
 
 	update: function() {
+		// v′= v×f เเรงเสียดท้าน ปกติค่าจะเท่ากับ 0-1
 		this.velocity.multiplyBy(this.friction);
 		this.velocity.addTo(this.gravity);
 		this.position.addTo(this.velocity);
