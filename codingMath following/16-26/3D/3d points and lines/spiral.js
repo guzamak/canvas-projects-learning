@@ -5,7 +5,7 @@ window.onload = function() {
 		height = canvas.height = window.innerHeight,
 		fl = 300,
 		points = [],
-		numPoints = 200,
+		numPoints = 1000,
 		centerZ = 2000,
 		radius = 1000,
 		baseAngle = 0,
@@ -15,7 +15,7 @@ window.onload = function() {
 	for(var i = 0; i < numPoints; i += 1) {
 		var point = {
 			angle: 0.2 * i,
-			y: 2000 - 4000 / numPoints * i + Math.random() * 500
+			y: 2000 - 4000 / numPoints * i + (Math.random() * 100 * [1,-1][Math.floor(Math.random()*2)])
 		};
 		point.x = Math.cos(point.angle + baseAngle) * radius;
 		point.z = centerZ + Math.sin(point.angle + baseAngle) * radius;
@@ -31,33 +31,39 @@ window.onload = function() {
 
 	update();
 
-	function update() {
-		baseAngle += rotationSpeed;
-		context.clearRect(-width / 2, -height / 2, width, height);
+function update() {
+    baseAngle += rotationSpeed;
+    context.clearRect(-width / 2, -height / 2, width, height);
 
-		context.beginPath();
-		for(var i = 0; i < numPoints; i += 1) {
-			var point = points[i],
-				perspective = fl / (fl + point.z);
+    context.beginPath();
 
-			context.save();
-			context.scale(perspective, perspective);
-			context.translate(point.x, point.y);
+    for (var i = 0; i < numPoints; i++) {
+        var point = points[i],
+            perspective = fl / (fl + point.z);
 
-			if(i == 0) {
-				context.moveTo(0, 0);
-			}
-			else {
-				context.lineTo(0, 0);
-			}
+        var px = point.x * perspective;
+        var py = point.y * perspective;
 
-			context.restore();
+        if (i === 0) {
+            context.moveTo(px, py);
+        } else {
+            context.lineTo(px, py);
+        }
 
-			point.x = Math.cos(point.angle + baseAngle) * radius;
-			point.z = centerZ + Math.sin(point.angle + baseAngle) * radius;
-		}
-		context.stroke();
-		requestAnimationFrame(update);
-	}
+        context.fillStyle = "red";
+        context.arc(px, py, 10 * perspective, 0, Math.PI * 2);
 
-};
+		// context.fillStyle = "red";
+        // context.fill();
+
+        // rotation matrix update
+        point.x = Math.cos(point.angle + baseAngle) * radius;
+        point.z = centerZ + Math.sin(point.angle + baseAngle) * radius;
+    }
+
+    context.strokeStyle = "black";
+    context.stroke();
+
+    requestAnimationFrame(update);
+}
+}

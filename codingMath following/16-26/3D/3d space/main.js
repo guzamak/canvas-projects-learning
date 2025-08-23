@@ -29,8 +29,10 @@ function update() {
 				var card = points[i],
 					perspective = fl / (fl + card.z);
 					context.save();
+					// perspective position
+					context.translate(card.x *perspective, card.y *perspective );
+					// perspective scale
 					context.scale(perspective, perspective);
-					context.translate(card.x , card.y );
 					context.beginPath();
 					context.fillStyle = "red";
 					context.arc(0, 0, 10, 0, 2 * Math.PI);
@@ -38,9 +40,13 @@ function update() {
 			
 			context.restore();
 			
+			// card.z += 5;
+			// if(card.z > 5000) {
+			// 		card.z = 0;
+			// 	}
 			card.z -= 5;
 			if(card.z < 0) {
-					card.z = 5000;
+					card.z = 1000;
 				}
 				}
 				requestAnimationFrame(update);
