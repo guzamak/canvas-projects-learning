@@ -36,6 +36,7 @@ window.onload = function() {
 			p = points[arguments[i]];
 			context.lineTo(p.sx, p.sy);
 		}
+		context.fill();
 	}
 
 	function translateModel(x, y, z) {
@@ -80,7 +81,6 @@ window.onload = function() {
 		if(needsUpdate) {
 			context.clearRect(-width / 2, -height / 2, width, height);
 			project();
-			
 			context.beginPath();
 			drawLine(0, 1, 2, 3, 0);
 			drawLine(4, 5, 6, 7, 4);

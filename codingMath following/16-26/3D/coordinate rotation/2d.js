@@ -7,7 +7,7 @@ window.onload = function() {
 			x: 300,
 			y: 200
 		},
-		delta = 0.5;
+		delta = 0.005;
 
 	context.translate(width / 2, height / 2);
 
