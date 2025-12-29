@@ -24,13 +24,12 @@ class Particle {
         this.amplitude = 10 + Math.random() * 40;           // Swing scale 
         this.radius = 3
         this.x = Math.random() * canvas.width
+        this.dx = this.x
         this.y = (Math.random() * canvas.height) + canvas.height + this.radius
         this.vy = 1+ Math.random() * 3
+        this.vx = 10
     }
 
-    calEquation(){
-        return this.pivotPoint + Math.sin((this.y / this.tightness) + this.shift) * this.amplitude
-    }
 
     draw(){
         ctx.beginPath()
@@ -40,7 +39,9 @@ class Particle {
     }
     update(){
         this.y -= this.vy 
-        this.x = calEquation()
+        this.x = (this.pivotPoint + Math.sin((this.y / this.tightness) + this.shift) * this.amplitude)
+        this.dx -= this.vx
+        this.x += this.dx 
     }
 }
 
