@@ -175,8 +175,8 @@ const engine = () => {
         // let translated = new Vertex(v.x - center.x, v.y - center.y, v.z - center.z);
         // console.log(translated)
         let rotated = multMat(rotZMat(angle), v);
-        rotated = multMat(rotXMat(angle),v)
-        rotated = multMat(rotYMat(angle),v)
+        rotated = multMat(rotYMat(angle),rotated)
+        rotated = multMat(rotXMat(angle),rotated)
         let movedBack = new Vertex(rotated.x + center.x, rotated.y + center.y, rotated.z + center.z);
         let proj2D = multMat(proj, movedBack);
 
