@@ -27,19 +27,29 @@ class Particle {
         this.dx = this.x
         this.y = (Math.random() * canvas.height) + canvas.height + this.radius
         this.vy = 1+ Math.random() * 3
-        this.vx = 10
+        this.vx = 5
+        //  opacity
+        this.opacity = 1
+        this.opacityTightness = 10 + Math.random * 20
     }
+    
 
 
-    draw(){
-        ctx.beginPath()
-        ctx.arc(this.x,this.y,this.radius,0,Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
-    }
+draw() {
+    ctx.save()
+    ctx.beginPath()
+    ctx.globalAlpha = this.opacity
+    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
+    ctx.ellipse(this.x,this.y,this.radius,this.radius *0.5, 0 ,0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+}
     update(){
         this.y -= this.vy 
         this.x = (this.pivotPoint + Math.sin((this.y / this.tightness) + this.shift) * this.amplitude)
+        // this.opacity = Math.abs(Math.sin((this.y / this.tightness)))
+        this.opacity = Math.abs(Math.sin(this.y / (this.tightness * 2)))
+        console.log(this.opacity)
         this.dx -= this.vx
         this.x += this.dx 
     }

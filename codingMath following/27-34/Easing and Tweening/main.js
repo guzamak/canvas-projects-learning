@@ -20,6 +20,7 @@ window.onload = function() {
         context.arc(position.x, position.y, 10,0,Math.PI*2),false;
         context.fill();
 
+        // basic easing (accel)
         //  vx vy graph
         //  **
         //    **

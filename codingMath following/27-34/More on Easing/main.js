@@ -35,10 +35,12 @@ window.onload = function() {
         }
     }
     const easeTo = (position,target, ease) => {
+        // normal easing
         var dx = target.x - position.x
         var dy = target.y - position.y
         position.x += dx * ease
         position.y += dy * ease
+        // ถ้าเป็นเเบบเดิมจะถึง target pos สักที (*0.1 ไปเรื่อยๆ)
         if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
             position.x = target.x
             position.y = target.y
