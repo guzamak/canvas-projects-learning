@@ -114,8 +114,20 @@ class Torus {
                 
             }
         }
-        // built Tri
-        // not now
+        const pointsPerRow = segments + 1;
+
+        for (let i = 0; i < segments; i++) {
+            for (let j = 0; j < segments; j++) {
+                // ถ้าเเก้จะบัค
+                const a = (i * pointsPerRow + j )% (loop * segments);
+                const b = (a + 1)  % (loop * segments);
+                const c =( a + pointsPerRow )% (loop * segments) ;
+                const d =( c + 1) % (loop * segments);
+
+                this.T.push([a, b, c]);
+            }
+        }
+
     }
 }
 const center = new Vertex(CW2, CH2, 0)
@@ -129,7 +141,7 @@ const animate = () => {
     ctx.fillRect(0,0,CW,CH)
     const projected = []
 
-     for (let v of donut.P){
+    for (let v of donut.P){
         // now origin is 0,0 nedd to change to top right centeralize origin to centerx , centery (midden of screen)
         // let translated = new Vertex(v.x - center.x, v.y - center.y, v.z - center.z);
         // console.log(translated)
@@ -139,10 +151,20 @@ const animate = () => {
         let movedBack = new Vertex(rotated.x + center.x, rotated.y + center.y, rotated.z + center.z);
         let proj2D = multMat(proj, movedBack);
 
-        drawVertex(proj2D.x,proj2D.y)
+        // drawVertex(proj2D.x,proj2D.y)
         projected.push(proj2D)
     }
-    
+    console.log(projected)
+    for (let t of donut.T){
+        const p1 = projected[t[0]]
+        const p2 = projected[t[1]]
+        const p3 = projected[t[2]]
+        
+        drawLine(p1.x,p1.y,p2.x,p2.y)
+        drawLine(p2.x,p2.y,p3.x,p3.y)
+        drawLine(p3.x,p3.y,p1.x,p1.y)
+    }
+
 
     requestAnimationFrame(animate) 
 } 
