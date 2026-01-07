@@ -162,7 +162,7 @@ const animate = () => {
         
         drawLine(p1.x,p1.y,p2.x,p2.y)
         drawLine(p2.x,p2.y,p3.x,p3.y)
-        drawLine(p3.x,p3.y,p1.x,p1.y)
+        // drawLine(p3.x,p3.y,p1.x,p1.y)
     }
 
 
