@@ -84,20 +84,27 @@ const drawLine = (x1, y1 ,x2, y2) => {
 }
 
 class Torus {
-    constructor(){
+    constructor(x,y,loops_n,segments,r,R){
+        this.loops_n = loops_n
+        this.segments = segments
+        this.r  = r
+        this.R  = R
         this.P = []
         this.T = []
+        this.x = x
+        this.y = y
     }
     init(){
         // built point
+        const loop = 10
         const segments = 20
         const R = 150
         const r = 40
-        for (let i =0; i < segments ; i++) {
-            // วงกลมเเนวนอน
+        for (let i = 0; i < segments ; i++) {
+            // วงกลมเเนว 2d เเบบ xy
             const theta = i * 2 * Math.PI / segments;
-            for (let j = 0; j < segments ; j++){
-              const phi = j * 2 * Math.PI / segments;
+            for (let j = 0; j < loop ; j++){
+              const phi = j * 2 * Math.PI / loop;
 
             const x = (R + r * Math.sin(theta)) * Math.cos(phi);
             const y = (R + r * Math.sin(theta)) * Math.sin(phi);
