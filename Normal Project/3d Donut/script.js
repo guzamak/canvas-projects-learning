@@ -90,23 +90,25 @@ class Torus {
     }
     init(){
         // built point
-        const segments = 40
-        const radius = 150
+        const segments = 20
+        const R = 150
+        const r = 40
         for (let i =0; i < segments ; i++) {
             // วงกลมเเนวนอน
             const theta = i * 2 * Math.PI / segments;
             for (let j = 0; j < segments ; j++){
-                const phi = j * 2 * Math.PI / segments;
+              const phi = j * 2 * Math.PI / segments;
 
-                const x = (radius + Math.sin(theta)) * Math.cos(phi)
-                const y = (radius + Math.sin(theta)) * Math.sin(phi)
-                const z = radius * Math.cos(theta)
+            const x = (R + r * Math.sin(theta)) * Math.cos(phi);
+            const y = (R + r * Math.sin(theta)) * Math.sin(phi);
+            const z = r * Math.cos(theta);
 
                 this.P.push(new Vertex(x,y,z))
                 
             }
         }
         // built Tri
+        // not now
     }
 }
 const center = new Vertex(CW2, CH2, 0)
