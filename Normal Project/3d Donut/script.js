@@ -9,6 +9,8 @@ const CH = canvas.height
 const CW2 = CW / 2
 const CH2 = CH / 2
 
+let angle = 0
+
 const proj = [
     [1,0,0],
     [0,1,0],
@@ -87,12 +89,53 @@ class Torus {
         this.T = []
     }
     init(){
+        // built point
+        const segments = 40
+        const radius = 150
+        for (let i =0; i < segments ; i++) {
+            // วงกลมเเนวนอน
+            const theta = i * 2 * Math.PI / segments;
+            for (let j = 0; j < segments ; j++){
+                const phi = j * 2 * Math.PI / segments;
 
+                const x = (radius + Math.sin(theta)) * Math.cos(phi)
+                const y = (radius + Math.sin(theta)) * Math.sin(phi)
+                const z = radius * Math.cos(theta)
+
+                this.P.push(new Vertex(x,y,z))
+                
+            }
+        }
+        // built Tri
     }
 }
+const center = new Vertex(CW2, CH2, 0)
+const donut = new Torus()
+donut.init()
 
 const animate = () => {
-  requestAnimationFrame(animate) 
+    angle += 0.02
+    ctx.clearRect(0,0,CW,CH)
+    ctx.fillStyle = 'black'
+    ctx.fillRect(0,0,CW,CH)
+    const projected = []
+
+     for (let v of donut.P){
+        // now origin is 0,0 nedd to change to top right centeralize origin to centerx , centery (midden of screen)
+        // let translated = new Vertex(v.x - center.x, v.y - center.y, v.z - center.z);
+        // console.log(translated)
+        let rotated = multMat(rotZMat(angle), v);
+        rotated = multMat(rotXMat(angle),rotated)
+        rotated = multMat(rotYMat(angle),rotated)
+        let movedBack = new Vertex(rotated.x + center.x, rotated.y + center.y, rotated.z + center.z);
+        let proj2D = multMat(proj, movedBack);
+
+        drawVertex(proj2D.x,proj2D.y)
+        projected.push(proj2D)
+    }
+    
+
+    requestAnimationFrame(animate) 
 } 
 
 animate()

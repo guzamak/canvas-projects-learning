@@ -180,7 +180,7 @@ const engine = () => {
         let movedBack = new Vertex(rotated.x + center.x, rotated.y + center.y, rotated.z + center.z);
         let proj2D = multMat(proj, movedBack);
 
-        // drawVertex(proj2D.x,proj2D.y)
+        drawVertex(proj2D.x,proj2D.y)
         circle_projected.push(proj2D)
     }
 
