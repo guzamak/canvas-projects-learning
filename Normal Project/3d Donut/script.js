@@ -96,8 +96,8 @@ class Torus {
     }
     init(){
         // built point
-        const loop = 10
-        const segments = 20
+        const loop = 20
+        const segments = 50
         const R = 150
         const r = 40
         for (let i = 0; i < segments ; i++) {
@@ -118,10 +118,10 @@ class Torus {
 
         for (let i = 0; i < segments; i++) {
             for (let j = 0; j < segments; j++) {
-                // ถ้าเเก้จะบัค
+                // ถ้าเเก้จะบัคเพราะ index เกิน
                 const a = (i * pointsPerRow + j )% (loop * segments);
                 const b = (a + 1)  % (loop * segments);
-                const c =( a + pointsPerRow )% (loop * segments) ;
+                const c =( a + pointsPerRow) % (loop * segments) ;
                 const d =( c + 1) % (loop * segments);
 
                 this.T.push([a, b, c]);
@@ -161,7 +161,7 @@ const animate = () => {
         const p3 = projected[t[2]]
         
         drawLine(p1.x,p1.y,p2.x,p2.y)
-        drawLine(p2.x,p2.y,p3.x,p3.y)
+        // drawLine(p2.x,p2.y,p3.x,p3.y)
         // drawLine(p3.x,p3.y,p1.x,p1.y)
     }
 
