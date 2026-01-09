@@ -70,7 +70,7 @@ class Vertex {
 
 const drawVertex = (x, y) => {
     ctx.beginPath()
-    ctx.arc(x, y, 5, 0, Math.PI * 2)
+    ctx.arc(x, y, 2, 0, Math.PI * 2)
     ctx.fillStyle = "white"
     ctx.fill()
 }
@@ -97,7 +97,7 @@ class Torus {
     init(){
         // built point
         const loop = 20
-        const segments = 50
+        const segments = 10
         const R = 150
         const r = 40
         for (let i = 0; i < segments ; i++) {
@@ -114,19 +114,34 @@ class Torus {
                 
             }
         }
-        const pointsPerRow = segments + 1;
 
+        // make circle edge in y 
         for (let i = 0; i < segments; i++) {
-            for (let j = 0; j < segments; j++) {
-                // ถ้าเเก้จะบัคเพราะ index เกิน
-                const a = (i * pointsPerRow + j )% (loop * segments);
-                const b = (a + 1)  % (loop * segments);
-                const c =( a + pointsPerRow) % (loop * segments) ;
-                const d =( c + 1) % (loop * segments);
-
-                this.T.push([a, b, c]);
+            for (let j = 0; j < loop; j++) {
+                // const a = (i * loop + j )
+                // const b = (a + segments) 
+            const a =  (i * loop + j )
+            let b = a+1
+            if (b >( (i+1) * loop )-1){
+                b = (a - loop) + 1
+            }
+            // console.log(i, (i+1) * loop)a
+            this.T.push([a, b]);
             }
         }
+        // console.log(this.T)
+        // make circle edge in z
+         for (let i = 0; i < segments; i++) {
+            for (let j = 0; j < loop; j++) {
+                const a = (i * loop + j )
+                let b = a + loop
+                if (b >= (loop * segments)){
+                    b -= (loop * segments)
+                }
+                this.T.push([a, b]);
+            }
+        }
+        // console.log(this.T)
 
     }
 }
@@ -151,18 +166,20 @@ const animate = () => {
         let movedBack = new Vertex(rotated.x + center.x, rotated.y + center.y, rotated.z + center.z);
         let proj2D = multMat(proj, movedBack);
 
-        // drawVertex(proj2D.x,proj2D.y)
+        drawVertex(proj2D.x,proj2D.y)
         projected.push(proj2D)
     }
-    console.log(projected)
+    // console.log(projected)
     for (let t of donut.T){
         const p1 = projected[t[0]]
         const p2 = projected[t[1]]
         const p3 = projected[t[2]]
         
         drawLine(p1.x,p1.y,p2.x,p2.y)
-        // drawLine(p2.x,p2.y,p3.x,p3.y)
-        // drawLine(p3.x,p3.y,p1.x,p1.y)
+        if (p3) {
+            drawLine(p2.x,p2.y,p3.x,p3.y)
+            drawLine(p3.x,p3.y,p1.x,p1.y)
+        }
     }
 
 
