@@ -99,7 +99,7 @@ class Torus {
         const loop = 20
         const segments = 10
         const R = 150
-        const r = 40
+        const r = 75
         for (let i = 0; i < segments ; i++) {
             // วงกลมเเนว 2d เเบบ xy
             const theta = i * 2 * Math.PI / segments;
